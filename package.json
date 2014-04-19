@@ -10,7 +10,8 @@
     "glob": "3.2.6", 
     "underscore": "~1.6.0", 
     "promise": "~4.0.0", 
-    "request": "~2.34.0"
+    "request": "~2.34.0", 
+    "moment": "~2.6.0"
   },
   "engines": {
   	"node": "0.10.26"
