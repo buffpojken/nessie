@@ -2,14 +2,14 @@ var config 						= require('./lib/config');
 var express 					= require('express'); 
 var fs 								= require('fs'); 
 var glob 							= require('glob');
-var OpenROVCamera 		= require('./lib/camera-mock')
+var OpenROVCamera 		= require('./lib/camera')
 var ECT 							= require('ect');
 var ectRenderer 			= ECT({ watch: true, root: __dirname + '/views', ext : '.ect' });
 var _ 								= require('underscore');
 var WebSocketServer 	= require('ws').Server; 
 var sys 							= require('util'); 
 
-// var camera = new OpenROVCamera({delay : 1});
+var camera = new OpenROVCamera({delay : 1});
 // camera.capture();
 
 var app 				= express(); 
