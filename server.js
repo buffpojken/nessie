@@ -1,11 +1,13 @@
-var config = require('./lib/config'); 
-var express 			= require('express'); 
-var fs 						= require('fs'); 
-var glob 					= require('glob');
-var OpenROVCamera = require('./lib/camera-mock')
-var ECT = require('ect');
-var ectRenderer = ECT({ watch: true, root: __dirname + '/views', ext : '.ect' });
-var _ 						= require('underscore')
+var config 						= require('./lib/config'); 
+var express 					= require('express'); 
+var fs 								= require('fs'); 
+var glob 							= require('glob');
+var OpenROVCamera 		= require('./lib/camera-mock')
+var ECT 							= require('ect');
+var ectRenderer 			= ECT({ watch: true, root: __dirname + '/views', ext : '.ect' });
+var _ 								= require('underscore');
+var WebSocketServer 	= require('ws').Server; 
+var sys 							= require('util'); 
 
 // var camera = new OpenROVCamera({delay : 1});
 // camera.capture();
@@ -32,3 +34,28 @@ glob('./web/*.js', {}, function(er, files){
 app.use(app.router); 
 //app.use(airbrake.expressHandler());
 app.listen(config.web.port);
+
+
+wss = new WebSocketServer({port: config.socket.port}); 
+wss.on('connection', function(ws){
+
+	ws.interval = setInterval(function(){
+		ws.send("ping"); 
+	}, 2000); 
+
+	ws.on('close', function(){
+		clearInterval(ws.interval);
+	});
+
+	ws.on('message', function(message){
+		var payload = JSON.parse(message); 
+		if(payload.command == "camera.on"){
+			console.log("turn on"); 
+			camera.capture(); 
+		}else if(payload.command == "camera.off"){
+			console.log("turn off"); 
+			camera.close(); 
+		}
+	});
+
+});
