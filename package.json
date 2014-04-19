@@ -1,0 +1,26 @@
+{
+  "name": "Nessie",
+  "version": "0.0.1",
+  "description": "Application for controlling the Nessie ROV",
+  "main": "server.js",
+  "dependencies": {
+    "connect": "~2.8.2",
+    "connect-redis": "~1.4.5",
+    "express": "~3.3.2",
+    "glob": "3.2.6", 
+    "underscore": "~1.6.0", 
+    "promise": "~4.0.0"
+  },
+  "engines": {
+  	"node": "0.10.26"
+  },
+  "devDependencies": {
+
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": "",
+  "author": "Daniel Sundström"
+}
