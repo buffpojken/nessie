@@ -25,7 +25,7 @@ var OpenROVCamera = function (opts) {
   var capture_process;
 
   // Open mjpg_streamer app as a child process
-  var cmd = 'mjpg_streamer';  // rename to correspond with your C++ compilation
+  var cmd = '/home/buffpojken/mjpeg/mjpg_streamer';  // rename to correspond with your C++ compilation
   var default_opts = {
     device : "/dev/video0",
     resolution : "SXGA",
